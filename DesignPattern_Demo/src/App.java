@@ -51,15 +51,17 @@ public class App {
         oop47.PrototypeTest obj2 = (oop47.PrototypeTest) obj1.clone();
         System.out.println("obj1==obj2?" + (obj1 == obj2));
 
-        //代理模式
+        //代理模式：基于接口
         oop48.IUserController userController = new oop48.TestUserControllerProxy(new oop48.UserController());
         userController.login("111", "222");
 
+        // 代理模式：基于类的继承
         oop48.IUserController userController2 = new oop48.TestUserControllerProxy2();
         userController2.login("333", "444");
 
+        // 代理模式：动态代理
         oop48.TestUserControllerProxy3 proxy = new oop48.TestUserControllerProxy3();
         oop48.IUserController userController3 = (oop48.IUserController) proxy.createProxy(new oop48.UserController());
-        userController3.login("555", "66");
+        userController3.login("555", "666");
     }
 }
