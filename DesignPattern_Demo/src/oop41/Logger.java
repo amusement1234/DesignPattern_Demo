@@ -6,7 +6,7 @@ import java.io.IOException;
 
 //单例模式
 // 1. 饿汉式
-public class Logger {
+public class Logger implements AutoCloseable {
     private FileWriter writer;
     private static final Logger instance = new Logger();
 
@@ -25,8 +25,20 @@ public class Logger {
         return instance;
     }
 
-    public void log(String message) throws IOException {
-        writer.write(message);
-        writer.flush();
+    public void log(String message) {
+        try {
+            writer.append(message + "\r\n");
+            writer.flush();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
+
+    @Override
+    public void close() throws Exception {
+        writer.flush();
+        writer.close();
+    }
+
 }

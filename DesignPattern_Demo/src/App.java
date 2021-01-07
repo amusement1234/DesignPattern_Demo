@@ -1,5 +1,28 @@
+import java.io.IOException;
+
 public class App {
     public static void main(String[] args) throws Exception {
+        // oop41.Logger logger1 = oop41.Logger.getInstance();
+        // oop41.Logger logger2 = oop41.Logger.getInstance();
+        // Runnable r1 = () -> {
+        //     for (int i = 0; i < 100; i++) {
+        //         String s = i + "r1: is a test " + System.currentTimeMillis() + "\n";
+        //         logger1.log(s);
+        //     }
+
+        // };
+        // Runnable r2 = () -> {
+        //     for (int i = 0; i < 100; i++) {
+        //         String s = i + "r2: is a test " + System.currentTimeMillis() + "\n";
+        //         logger2.log(s);
+        //     }
+
+        // };
+
+        // Thread t1 = new Thread(r1);
+        // Thread t2 = new Thread(r2);
+        // t1.run();
+
         //单例模式
         oop41.test.Logger l11 = oop41.test.Logger.getInstance();
         oop41.test.Logger l12 = oop41.test.Logger.getInstance();
@@ -22,5 +45,21 @@ public class App {
         oop46.ResourcePoolConfig build = new oop46.TestBuilder().setName("aa").setmax(10).setmin(1).build();
         oop46.test.ResourcePoolConfig build2 = new oop46.test.TestBuilder().setName("bb").setMin(10).setMax(20)
                 .builder();
+
+        // 原型模式
+        oop47.PrototypeTest obj1 = new oop47.PrototypeTest();
+        oop47.PrototypeTest obj2 = (oop47.PrototypeTest) obj1.clone();
+        System.out.println("obj1==obj2?" + (obj1 == obj2));
+
+        //代理模式
+        oop48.IUserController userController = new oop48.TestUserControllerProxy(new oop48.UserController());
+        userController.login("111", "222");
+
+        oop48.IUserController userController2 = new oop48.TestUserControllerProxy2();
+        userController2.login("333", "444");
+
+        oop48.TestUserControllerProxy3 proxy = new oop48.TestUserControllerProxy3();
+        oop48.IUserController userController3 = (oop48.IUserController) proxy.createProxy(new oop48.UserController());
+        userController3.login("555", "66");
     }
 }
